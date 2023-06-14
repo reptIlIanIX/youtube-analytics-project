@@ -30,5 +30,4 @@ class PLVideo(Video):
                                           maxResults=50,
                                           ).execute()
 
-    def __str__(self):
-        return f"{self.video_title}"
+
