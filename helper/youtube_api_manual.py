@@ -26,8 +26,8 @@ docs: https://developers.google.com/youtube/v3/docs/channels/list
 '''
 channel_id = 'UC-OVMPlMA3-YCIeg4z5z23A'  # MoscowPython
 # channel_id = 'UCwHL6WHUarjGfUM_586me8w'  # HighLoad Channel
-channel = youtube.channels().list(id=channel_id, part='snippet,statistics').execute()
-printj(channel)
+channel = youtube.channels().list(id=channel_id, part='snippet,id,statistics').execute()
+
 
 
 '''
@@ -35,13 +35,14 @@ printj(channel)
 docs: https://developers.google.com/youtube/v3/docs/playlists/list
 '''
 playlists = youtube.playlists().list(channelId=channel_id,
-                                     part='contentDetails,snippet',
+                                     part='contentDetails, id, snippet',
                                      maxResults=50,
                                      ).execute()
+
 # printj(playlists)
-for playlist in playlists['items']:
-    print(playlist)
-    print()
+# for playlist in playlists['items']:
+#     print(playlist)
+#     print()
 
 
 '''
@@ -54,10 +55,13 @@ https://www.youtube.com/playlist?list=PLH-XmS0lSi_zdhYvcwUfv0N88LQRt6UZn
 '''
 playlist_id = 'PLH-XmS0lSi_zdhYvcwUfv0N88LQRt6UZn'
 playlist_videos = youtube.playlistItems().list(playlistId=playlist_id,
-                                               part='contentDetails',
+                                               part='contentDetails, status',
                                                maxResults=50,
                                                ).execute()
-# printj(playlist_videos)
+
+
+printj(playlist_videos)
+
 
 # получить все id видеороликов из плейлиста
 video_ids: list[str] = [video['contentDetails']['videoId'] for video in playlist_videos['items']]
