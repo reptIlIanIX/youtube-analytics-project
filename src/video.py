@@ -13,6 +13,7 @@ class Video:
         video_response = self.youtube.videos().list(part='snippet,statistics,contentDetails,topicDetails',
                                                     id=video_id
                                                     ).execute()
+        self.video_id = video_id
         self.video_title: str = video_response['items'][0]['snippet']['title']
         self.view_count: int = video_response['items'][0]['statistics']['viewCount']
         self.like_count: int = video_response['items'][0]['statistics']['likeCount']
@@ -29,5 +30,4 @@ class PLVideo(Video):
                                           part='contentDetails',
                                           maxResults=50,
                                           ).execute()
-
-
+        self.playlist_id = playlist_id
