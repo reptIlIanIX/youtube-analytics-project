@@ -12,7 +12,7 @@ class Channel:
     def __init__(self, channel_id: str) -> None:
         """Экземпляр инициализирует id канала. Дальше все данные будут подтягиваться по API."""
         self.channel = self.youtube.channels().list(id=channel_id, part='snippet,statistics').execute()
-        for item in self.channel['items']:
+        for item in self.channel['items'][0]:
             self.__channel_id = channel_id
             self.title = item['snippet']['title']
             self.description = item['snippet']['description']
